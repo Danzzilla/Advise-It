@@ -34,14 +34,17 @@ class AdviseItController
         //Connect to Database
         require('/home/dsvirida/config.php');
 
-//create a new plan
+        //start session
+        session_start();
+
+        //create a new plan
         $sql = "INSERT INTO plans(PlanID) VALUES(null)";
 
         $statement = $dbh->prepare($sql);
         $statement->execute();
 
-//get the id of the new plan and send it to client
-        $sql = "SELECT PlanID FROM `plans` ORDER BY Modified DESC LIMIT 1";
+        //get the id of the new plan and send it to client
+        $sql = "SELECT PlanID FROM plans ORDER BY Modified DESC LIMIT 1";
 
         $statement = $dbh->prepare($sql);
         $statement->execute();
@@ -57,7 +60,10 @@ class AdviseItController
      */
     function plan($planid)
     {
-        $this->_f3->set('plan["id"]', $planid);
+
+        //retrieve data and put into f3 to populate plan page
+        Functions::retrieveToF3($planid, $this->_f3);
+
         $view = new Template();
         echo $view->render('views/plan.html');
     }
