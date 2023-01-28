@@ -34,9 +34,6 @@ class AdviseItController
         //Connect to Database
         require('/home/dsvirida/config.php');
 
-        //start session
-        session_start();
-
         //create a new plan
         $sql = "INSERT INTO plans(PlanID) VALUES(null)";
 
@@ -60,8 +57,8 @@ class AdviseItController
      */
     function plan($planid)
     {
-
         //retrieve data and put into f3 to populate plan page
+        $this->_f3->set('quarters', DataLayer::getQuarters());
         Functions::retrieveToF3($planid, $this->_f3);
 
         $view = new Template();

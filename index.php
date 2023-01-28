@@ -1,14 +1,10 @@
 <?php
-
 //Error reporting
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 //Autoload file required
 require_once('vendor/autoload.php');
-
-//start session
-session_start();
 
 //Create instance of Base Class
 $f3 = Base::instance();
@@ -27,7 +23,7 @@ $f3->route('GET /CreatePlan', function(){
 });
 
 // Plan Route
-$f3->route('GET /plan@planid', function(\Base $f3, array $params){
+$f3->route('GET|POST /plan@planid', function(\Base $f3, array $params){
     $GLOBALS['controller']->plan($params['planid']);
 });
 
