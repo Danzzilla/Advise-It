@@ -12,10 +12,14 @@
                 </div>
                 <ul id="{{ @quarter }}1List">
                     <repeat group="{{ @plan[@quarter.'1'] }}" value="{{ @item }}">
-                        <li id="{{ @quarter.'1 '.@item }}">
-                            {{ @item }}
-                            <button class="btn-danger align-self-end remove" value="{{ @quarter.'1 '.@item }}">Remove</button>
-                        </li>
+                        <check if="trim(@item) == ''">
+                            <false>
+                                <li id="{{ @quarter.'1 '.@item }}">
+                                    {{ @item }}
+                                    <button class="btn-danger align-self-end remove" value="{{ @quarter.'1 '.@item }}">Remove</button>
+                                </li>
+                            </false>
+                        </check>
                     </repeat>
                 </ul>
             </div>
@@ -32,10 +36,14 @@
                 </div>
                 <ul id="{{ @quarter }}2List">
                     <repeat group="{{ @plan[@quarter.'2'] }}" value="{{ @item }}">
-                        <li id="{{ @quarter.'2 '.@item }}">
-                            {{ @item }}
-                            <button class="btn-danger align-self-end remove" value="{{ @quarter.'2 '.@item }}">Remove</button>
-                        </li>
+                        <check if="trim(@item) == ''">
+                            <false>
+                                <li id="{{ @quarter.'2 '.@item }}">
+                                    {{ @item }}
+                                    <button class="btn-danger align-self-end remove" value="{{ @quarter.'2 '.@item }}">Remove</button>
+                                </li>
+                            </false>
+                        </check>
                     </repeat>
                 </ul>
             </div>
