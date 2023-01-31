@@ -1,6 +1,6 @@
 <include href="includes/header.html"></include>
 <body>
-<h1 id="planid" class="text-center m-3">Plan {{@plan['id']}}</h1>
+<h1 id="planid" class="text-center m-3">Plan {{@plan['ID']}}</h1>
 <div class="container">
     <div class="row">
         <repeat group="{{ @quarters }}" value="{{ @quarter }}">
@@ -11,6 +11,12 @@
                     <button class="btn-primary add" value="{{ @quarter }}1">Add</button>
                 </div>
                 <ul id="{{ @quarter }}1List">
+                    <repeat group="{{ @plan[@quarter.'1'] }}" value="{{ @item }}">
+                        <li id="{{ @quarter.'1 '.@item }}">
+                            {{ @item }}
+                            <button class="btn-danger align-self-end remove" value="{{ @quarter.'1 '.@item }}">Remove</button>
+                        </li>
+                    </repeat>
                 </ul>
             </div>
         </repeat>
@@ -25,6 +31,12 @@
                     <button class="btn-primary add" value="{{ @quarter }}2">Add</button>
                 </div>
                 <ul id="{{ @quarter }}2List">
+                    <repeat group="{{ @plan[@quarter.'2'] }}" value="{{ @item }}">
+                        <li id="{{ @quarter.'2 '.@item }}">
+                            {{ @item }}
+                            <button class="btn-danger align-self-end remove" value="{{ @quarter.'2 '.@item }}">Remove</button>
+                        </li>
+                    </repeat>
                 </ul>
             </div>
         </repeat>

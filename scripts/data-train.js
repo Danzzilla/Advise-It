@@ -17,7 +17,10 @@ class DataTrain{
     }
 
     addClassNote(id, content){
-        this.data[id].push(content);
+        //check if added content is empty or whitespace
+        if(content.replace(/\s/g, "") != ""){
+            this.data[id].push(content);
+        }
     }
 
     flush(){
@@ -26,14 +29,6 @@ class DataTrain{
             url: "model/save.php",
             data: JSON.stringify(this.data)
         })
-
-        // let xhr = new XMLHttpRequest();
-        //
-        // xhr.open("POST", "", true);
-        // xhr.setRequestHeader("Content-Type", "application/json; charset: UTF-8");
-        //
-        // let json = JSON.stringify(this.data);
-        // xhr.send(json);
     }
 
 }
