@@ -34,20 +34,32 @@ class AdviseItController
         //Connect to Database
         require('/home/dsvirida/config.php');
 
+        //Create a new ID
+        $id = false;
+        $found = false;
+        while($found == false){
+            $id = substr(md5(uniqid(rand())), -6);
+            echo "\n1i. $id";
+
+            $sql = "SELECT PlanID FROM plans WHERE PlanID = '$id'";
+
+            $statement = $dbh->prepare($sql);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+            echo "\n1p. ".$result['PlanID'];
+
+            if($id != $result['PlanID']){
+                $found = true;
+            }
+        }
+
         //create a new plan
-        $sql = "INSERT INTO plans(PlanID) VALUES(null)";
+        echo "\n2i. $id";
+        $sql = "INSERT INTO plans(PlanID) VALUES('$id')";
 
         $statement = $dbh->prepare($sql);
         $statement->execute();
-
-        //get the id of the new plan and send it to client
-        $sql = "SELECT PlanID FROM plans ORDER BY Modified DESC LIMIT 1";
-
-        $statement = $dbh->prepare($sql);
-        $statement->execute();
-
-        $result = $statement->fetch(PDO::FETCH_ASSOC);
-        $id = $result['PlanID'];
 
         header('location: plan'.$id);
     }

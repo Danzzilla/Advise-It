@@ -1,4 +1,8 @@
 <?php
+//!!important--
+// Dont remove single quotes around PlanID value in queries or else it
+// breaks the query for some reason
+
 class Functions
 {
     static function retrieveToF3($planid, $f3)
@@ -7,7 +11,7 @@ class Functions
         require('/home/dsvirida/config.php');
 
         //fetch data from database to fill in the plan with what was saved
-        $sql = "SELECT * FROM plans WHERE PlanID = ".$planid;
+        $sql = "SELECT * FROM plans WHERE PlanID = '$planid'";
 
         $statement = $dbh->prepare($sql);
         $statement->execute();
@@ -43,7 +47,7 @@ class Functions
         require('/home/dsvirida/config.php');
 
         //fetch data from database to fill in the plan with what was saved
-        $sql = "SELECT * FROM plans WHERE PlanID = ".$data->ID;
+        $sql = "SELECT * FROM plans WHERE PlanID = '$data->ID'";
 
         $statement = $dbh->prepare($sql);
         $statement->execute();
@@ -63,7 +67,7 @@ class Functions
         $sql = "UPDATE plans
                 SET Modified = null, Fall1 = :fall1, Fall2 = :fall2, Winter1 = :winter1, Winter2 = :winter2,
                     Spring1 = :spring1, Spring2 = :spring2, Summer1 = :summer1, Summer2 = :summer2
-                WHERE PlanID = ".$data->ID;
+                WHERE PlanID = '$data->ID'";
 
         $statement = $dbh->prepare($sql);
 
@@ -85,7 +89,7 @@ class Functions
         require('/home/dsvirida/config.php');
 
         //fetch data from database to fill in the plan with what was saved
-        $sql = "SELECT * FROM plans WHERE PlanID = ".$data->ID;
+        $sql = "SELECT * FROM plans WHERE PlanID = '$data->ID'";
 
         $statement = $dbh->prepare($sql);
         $statement->execute();
@@ -101,7 +105,7 @@ class Functions
 
             $sql = "UPDATE plans
                 SET $itemfo[0] = :updated
-                WHERE PlanID = ".$data->ID;
+                WHERE PlanID = '$data->ID'";
 
             $statement = $dbh->prepare($sql);
 
